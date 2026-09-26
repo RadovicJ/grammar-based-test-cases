@@ -4,23 +4,26 @@ import com.example.client.EvalInterface;
 import com.example.client.Statement;
 import com.example.subrules.ParenExpr;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public class IfStatement implements EvalInterface {
 
-    private final int depth;
     static final Random RNG = new Random();
+    private final int level;
 
-    public IfStatement(int depth) {
-        this.depth = depth;
+    public IfStatement(int level) {
+        this.level = level;
     }
 
     @Override
-    public String eval() {
+    public ArrayList<Object> eval() {
+        ArrayList<Object> list = new ArrayList<>();
         StringBuilder sb = new StringBuilder();
-        sb.append("if ").append(new ParenExpr(depth - 1).eval()).append(' ').append(new Statement(depth - 1).eval());
+        sb.append("if ").append(new ParenExpr().eval()).append(' ').append(new Statement(level + 1).eval());
         if (RNG.nextBoolean())
-            sb.append(" else ").append(new Statement(depth - 1).eval());
-        return sb.toString();
+            sb.append(" else ").append(new Statement(level + 1).eval());
+        list.add(sb.toString());
+        return list;
     }
 }

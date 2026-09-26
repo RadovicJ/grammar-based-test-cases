@@ -2,17 +2,18 @@ package com.example.subrules;
 
 import com.example.client.EvalInterface;
 
+import java.util.ArrayList;
+
 public class Test implements EvalInterface {
 
-    private final int depth;
-
-    public Test(int depth) {
-        this.depth = depth;
-    }
-
     @Override
-    public String eval() {
-        if (depth <= 0) return new Sum(depth).eval();
-        return new Sum(depth - 1).eval() + " < " + new Sum(depth - 1).eval();
+    public ArrayList<Object> eval() {
+        ArrayList<Object> list = new ArrayList<>();
+//        if (depth <= 0) {
+//            list.add(new Sum().eval());
+//            return list;
+//        }
+//        list.add(new Sum().eval() + " < " + new Sum().eval());
+        return list;
     }
 }

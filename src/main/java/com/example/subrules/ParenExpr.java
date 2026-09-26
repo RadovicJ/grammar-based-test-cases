@@ -2,16 +2,14 @@ package com.example.subrules;
 
 import com.example.client.EvalInterface;
 
+import java.util.ArrayList;
+
 public class ParenExpr implements EvalInterface {
 
-    private final int depth;
-
-    public ParenExpr(int depth) {
-        this.depth = depth;
-    }
-
     @Override
-    public String eval() {
-        return "(" + new Expr(depth - 1).eval() + ")";
+    public ArrayList<Object> eval() {
+        ArrayList<Object> list = new ArrayList<>();
+        list.add("(" + new Expr(false).eval() + ")");
+        return list;
     }
 }

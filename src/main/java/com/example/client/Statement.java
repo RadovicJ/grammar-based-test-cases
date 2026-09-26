@@ -5,24 +5,26 @@ import com.example.rules.ExprStatement;
 import com.example.rules.IfStatement;
 import com.example.rules.WhileStatement;
 
-import java.util.Random;
+import java.util.ArrayList;
 
 public class Statement implements EvalInterface {
 
-    private final int depth;
-    static final Random RNG = new Random();
+    private final int level;
 
-    public Statement(int depth) {
-        this.depth = depth;
+    public Statement(int level) {
+        this.level = level;
     }
 
     @Override
-    public String eval() {
-        switch (RNG.nextInt(4)) {
-            case 0: return new IfStatement(depth).eval();
-            case 1: return new WhileStatement(depth).eval();
-            case 2: return new BlockStatement(depth).eval();
-            default: return new ExprStatement(depth).eval();
+    public ArrayList<Object> eval() {
+        if (level == 2) {
+            return null;
         }
+        ArrayList<Object> list = new ArrayList<>();
+        list.add(new IfStatement(level).eval());
+//        list.add(new WhileStatement().eval());
+//        list.add(new BlockStatement().eval());
+//        list.add(new ExprStatement().eval());
+        return list;
     }
 }

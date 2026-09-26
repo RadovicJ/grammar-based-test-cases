@@ -1,7 +1,10 @@
 package com.example.generators;
 
 import com.example.client.EvalInterface;
+import com.example.client.Singleton;
+import org.antlr.v4.runtime.misc.Pair;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public class IdGenerator implements EvalInterface {
@@ -9,7 +12,7 @@ public class IdGenerator implements EvalInterface {
     private static final Random RNG = new Random();
 
     @Override
-    public String eval() {
+    public ArrayList<Integer> eval() {
         String chars = "abcdefghijklmnopqrstuvwxyz";
         StringBuilder sb = new StringBuilder();
         int size = RNG.nextInt(5) + 1;
@@ -19,10 +22,17 @@ public class IdGenerator implements EvalInterface {
         }
         String var = sb.toString();
         if (var.equals("if")) {
-            return "x";
+            var = "x";
         } else if (var.equals("while")) {
-            return "y";
+            var = "y";
         }
-        return var;
+
+        ArrayList<Integer> list = new ArrayList<>();
+        Singleton instance = Singleton.getInstance();
+
+        instance.map.put(instance.value, var);
+        list.add(instance.value);
+        Singleton.increment();
+        return list;
     }
 }

@@ -3,16 +3,14 @@ package com.example.rules;
 import com.example.client.EvalInterface;
 import com.example.subrules.Expr;
 
+import java.util.ArrayList;
+
 public class ExprStatement implements EvalInterface {
 
-    private final int depth;
-
-    public ExprStatement(int depth) {
-        this.depth = depth;
-    }
-
     @Override
-    public String eval() {
-        return new Expr(depth).eval() + ";";
+    public ArrayList<Object> eval() {
+        ArrayList<Object> list = new ArrayList<>();
+        list.add(new Expr(false).eval() + ";");
+        return list;
     }
 }

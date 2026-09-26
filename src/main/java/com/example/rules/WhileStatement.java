@@ -4,16 +4,20 @@ import com.example.client.EvalInterface;
 import com.example.client.Statement;
 import com.example.subrules.ParenExpr;
 
+import java.util.ArrayList;
+
 public class WhileStatement implements EvalInterface {
 
-    private final int depth;
+    private final int level;
 
-    public WhileStatement(int depth) {
-        this.depth = depth;
+    public WhileStatement(int level) {
+        this.level = level;
     }
 
     @Override
-    public String eval() {
-        return "while " + new ParenExpr(depth - 1).eval() + " " + new Statement(depth - 1).eval();
+    public ArrayList<Object> eval() {
+        ArrayList<Object> list = new ArrayList<>();
+        list.add("while " + new ParenExpr().eval() + " " + new Statement(level + 1).eval());
+        return list;
     }
 }

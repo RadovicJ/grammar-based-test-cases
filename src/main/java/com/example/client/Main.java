@@ -1,14 +1,13 @@
 package com.example.client;
 
-import java.util.Random;
+import com.example.rules.IfStatement;
+
+import java.util.ArrayList;
 
 public class Main {
 
-    static final Random RNG = new Random();
-
     public static void main(String[] args) {
-        for (int i = 0; i < 10; i++) {
-            System.out.println("- Program " + (i+1) + ": " + new Statement(RNG.nextInt(10)).eval());
-        }
+        ArrayList<Object> list = new Statement(0).eval();
+        String s = list.get(0).toString();
     }
 }
