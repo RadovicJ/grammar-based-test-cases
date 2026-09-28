@@ -16,15 +16,14 @@ public class Statement implements EvalInterface {
     }
 
     @Override
-    public ArrayList<Object> eval() {
-        if (level == 2) {
-            return null;
+    public ArrayList<Integer> eval() {
+        ArrayList<Integer> list = new ArrayList<>();
+        if (level < 2) {
+            list.addAll(new IfStatement(level).eval());
+            list.addAll(new WhileStatement(level).eval());
+            list.addAll(new BlockStatement(level).eval());
         }
-        ArrayList<Object> list = new ArrayList<>();
-        list.add(new IfStatement(level).eval());
-//        list.add(new WhileStatement().eval());
-//        list.add(new BlockStatement().eval());
-//        list.add(new ExprStatement().eval());
+        list.addAll(new ExprStatement().eval());
         return list;
     }
 }
